@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#07101c">
+  <title>RiskGuard — Payment Risk Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><span>R</span><i></i></div>
+      <div><strong>RiskGuard</strong><span>PAYMENT INTELLIGENCE</span></div>
+    </div>
+
+    <div class="nav-label">COMMAND CENTER</div>
+    <nav>
+      <button class="nav active" data-page="monitor"><span class="nav-icon">◉</span><span>Live Monitor</span><kbd>01</kbd></button>
+      <button class="nav" data-page="analyze"><span class="nav-icon">⌁</span><span>Risk Explainability</span><kbd>02</kbd></button>
+      <button class="nav" data-page="graph"><span class="nav-icon">⌘</span><span>Fraud Network</span><kbd>03</kbd></button>
+      <button class="nav" data-page="behavior"><span class="nav-icon">◌</span><span>Behavioral Baseline</span><kbd>04</kbd></button>
+    </nav>
+
+    <div class="sidebar-note">
+      <div class="live-ring"><i></i></div>
+      <div><b>MODEL ONLINE</b><span>Adaptive baseline v1.0</span></div>
+    </div>
+    <div class="sidebar-foot"><span>RISKGUARD LABS</span><span>v1.0.0</span></div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <div class="breadcrumb"><span>RISKGUARD</span><b>/</b><strong id="crumb">LIVE MONITOR</strong></div>
+      <div class="top-actions">
+        <div class="system-pill"><i></i><span id="apiStatus">API CONNECTING…</span></div>
+        <button class="refresh" id="refreshBtn" title="Refresh telemetry">↻</button>
+        <div class="avatar">AM</div>
+      </div>
+    </header>
+
+    <section id="monitor" class="page active">
+      <div class="hero-row">
+        <div>
+          <div class="eyebrow"><i></i> REAL-TIME PAYMENT TELEMETRY</div>
+          <h1>Know before<br><span>money moves.</span></h1>
+          <p class="lede">RiskGuard evaluates transaction context, learns normal behavior and explains anomalies in real time.</p>
+        </div>
+        <div class="hero-actions">
+          <div class="threat-card"><span>THREAT LEVEL</span><b id="threatLabel">NOMINAL</b><small>Live model assessment</small></div>
+          <button class="primary" id="newAnalysis"><span>＋</span> Analyze payment</button>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card accent-cyan"><div class="stat-top"><span>PROCESSED · 24H</span><i>↗</i></div><strong id="processed">—</strong><small><b>+14.2%</b> vs baseline</small><div class="spark"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+        <div class="stat-card accent-red"><div class="stat-top"><span>CRITICAL THREATS</span><i>!</i></div><strong id="critical">—</strong><small>Requires immediate review</small><div class="stat-line"><i></i></div></div>
+        <div class="stat-card accent-violet"><div class="stat-top"><span>ACTIVE NODES</span><i>◇</i></div><strong id="nodes">—</strong><small>Global telemetry synced</small><div class="stat-line"><i></i></div></div>
+        <div class="stat-card accent-yellow"><div class="stat-top"><span>SYSTEM VELOCITY</span><i>⚡</i></div><strong id="velocity">—</strong><small>Average latency <b>12ms</b></small><div class="stat-line"><i></i></div></div>
+      </div>
+
+      <div class="section-toolbar">
+        <div class="filter-group"><span>FILTER</span><button class="filter active">ALL FEED</button><button class="filter" data-filter="critical">CRITICAL</button><button class="filter" data-filter="suspicious">SUSPICIOUS</button><button class="filter" data-filter="normal">NORMAL</button></div>
+        <span class="stream-status"><i></i> LIVE STREAM <em>15s</em></span>
+      </div>
+
+      <div class="panel feed-panel">
+        <div class="panel-head"><div><div class="panel-kicker">TRANSACTION INTELLIGENCE</div><h2>Incoming payment stream</h2><p>Every payment is evaluated against user behavior and contextual signals.</p></div><button class="square-btn" id="reloadTable">↻</button></div>
+        <div class="table-wrap"><table><thead><tr><th>TRANSACTION</th><th>PAYMENT</th><th>RISK</th><th>CONTEXT SHIFT</th><th>FLAGS</th><th>ACTION</th></tr></thead><tbody id="txBody"></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="analyze" class="page">
+      <div class="page-title"><div><div class="eyebrow"><i></i> TRANSACTION + CONTEXT → RISK MODEL</div><h1>Risk Explainability</h1><p>Run a payment through the same decision flow and inspect exactly why the model changed its confidence.</p></div><div class="model-chip"><i></i> ADAPTIVE MODEL <b>v1.0</b></div></div>
+      <div class="analysis-grid">
+        <form id="analysisForm" class="panel form-panel">
+          <div class="panel-head compact"><div><div class="panel-kicker">INPUT CONTEXT</div><h2>Payment details</h2></div><span class="step">01 / 02</span></div>
+          <div class="form-body">
+            <div class="field-row"><label>Amount (₹)<input name="amount" type="number" value="25000" required></label><label>Velocity ×<input name="velocity" type="number" step="0.1" value="1"></label></div>
+            <label>Recipient name<input name="recipient" value="Unknown Merchant" required></label>
+            <label>Recipient ID<input name="recipientId" value="ACC-777" required></label>
+            <div class="field-row"><label>Device<input name="device" value="Android 14 / Pixel" required></label><label>Location<input name="location" value="Mumbai, IN" required></label></div>
+            <div class="field-row"><label>Payment source<select name="qr"><option value="false">Bank / UPI</option><option value="true">QR request</option></select></label><label>Session state<select><option>Authenticated</option><option>New session</option><option>Step-up required</option></select></label></div>
+            <label>Accompanying message<textarea name="message">Please confirm this payment immediately to avoid an account fee.</textarea></label>
+            <button class="primary wide" type="submit"><span>Run analysis</span><b>→</b></button>
+            <p class="form-note">Signals include amount deviation, recipient history, device, location, velocity, QR context and message semantics.</p>
+          </div>
+        </form>
+        <div id="result" class="result-area"><div class="empty-state"><div class="empty-icon">⌁</div><span>READY FOR ANALYSIS</span><h2>Awaiting payment context</h2><p>Submit a payment to see the model score, evidence, baseline comparison and recommended action.</p><div class="empty-points"><span>01 · Behavioral baseline</span><span>02 · Context signals</span><span>03 · Explainable decision</span></div></div></div>
+      </div>
+    </section>
+
+    <section id="behavior" class="page">
+      <div class="page-title"><div><div class="eyebrow"><i></i> LEARNED USER BEHAVIOR</div><h1>Behavioral Baseline</h1><p>The model learns what normal looks like from observed activity instead of relying on a single hard threshold.</p></div><div class="model-chip"><i></i> LEARNING WINDOW <b>RECENT</b></div></div>
+      <div id="behaviorContent"></div>
+    </section>
+
+    <section id="graph" class="page">
+      <div class="page-title"><div><div class="eyebrow"><i></i> BONUS · GRAPH ANALYSIS</div><h1>Fraud Network</h1><p>Surface coordinated patterns across accounts, devices and recipients using relationship signals.</p></div><div class="network-legend"><span><i class="red"></i> high risk</span><span><i class="yellow"></i> watch</span><span><i class="white"></i> normal</span></div></div>
+      <div class="graph-layout"><div class="panel graph-panel"><div class="graph-top"><div><div class="panel-kicker">RELATIONSHIP MAP</div><h2>Connected entity graph</h2></div><span class="graph-live"><i></i> ANALYSIS READY</span></div><canvas id="graphCanvas" width="900" height="520"></canvas></div><div id="clusters" class="cluster-list"></div></div>
+    </section>
+  </main>
+</div>
+<div id="toast"></div>
+<script src="/app.js"></script>
+</body>
+</html>
