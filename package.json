@@ -1,0 +1,8 @@
+{
+  "name": "riskguard-payment-risk-assistant",
+  "version": "1.0.0",
+  "description": "Full-stack real-time payment risk assistant with explainable risk scoring and graph fraud analysis.",
+  "private": true,
+  "scripts": {"start": "node server.js"},
+  "engines": {"node": ">=18"}
+}
